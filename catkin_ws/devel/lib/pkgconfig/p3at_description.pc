@@ -1,0 +1,8 @@
+prefix=/home/onyx/Desktop/RTG/catkin_ws/devel
+
+Name: p3at_description
+Description: Description of p3at_description
+Version: 1.0.0
+Cflags: 
+Libs: -L/home/onyx/Desktop/RTG/catkin_ws/devel/lib 
+Requires: 

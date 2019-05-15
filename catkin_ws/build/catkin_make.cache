@@ -1,0 +1,2 @@
+explore:hector_nist_arenas_gazebo/hector_nist_arena_designer:hector_nist_arenas_gazebo/hector_nist_arena_elements:hector_nist_arenas_gazebo/hector_nist_arena_worlds:pioneer3at_demo/p3at_description:pioneer3at_demo/p3at_gazebo:pioneer3at_demo/p3at_plugin:rtg_proje:visp_auto_tracker
+-DCATKIN_DEVEL_PREFIX=/home/onyx/Desktop/RTG/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/onyx/Desktop/RTG/catkin_ws/install -G Unix Makefiles

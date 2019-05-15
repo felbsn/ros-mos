@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="gui" default="true"/>
+
+  	<include file="$(find rtg_proje)/launch/start.launch">
+   		<arg name="world" value="exp3_alan.world"/> 
+   		<arg name="gui" value="$(arg gui)"/> 
+  	</include>
+
+	<include file="$(find p3at_description)/launch/spawn_p3at.launch">
+    		<arg name="robot_name" value="robot"/>
+    		<arg name="pose_args" value="-x 0 -y 0"/> 
+  	</include>
+
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.13 0 0.42 0.0 0.0 0.0 robot/base_link robot/hokuyo_frame 100" />
+ <node pkg="tf" type="static_transform_publisher" name="xxx_link_to_xxx" args="0.13 0 0.42 0.0 0.0 0.0  map  robot/odom 60" />
+<!--<node pkg="tf" type="static_transform_publisher" name="robot_to_map" args="0.00 0 0.0 0.0 0.0 0.0   map robot/base_link 60"/>-->
+
+
+
+
+<node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find rtg_proje)/rviz/rtg_proje.rviz" />
+<!--node pkg="gmapping" type="slam_gmapping" output="screen" name="mapx" >
+
+   <param name="scan" value="robot/hokuyo"/>
+    <param name="base_frame" value="robot/base_link"/>
+    <param name="odom_frame" value="robot/odom"/>
+    <param name="map_frame"  value="map"/>
+    <param name="map_update_interval" value="1.0"/>
+
+</node-->
+
+
+<node pkg="gmapping" type="slam_gmapping" output="screen" name="mapx" args="scan:=robot/hokuyo _base_frame:=robot/base_link"/> 
+<!---->
+
+<node pkg="rtg_proje" type="keyboard_cmdvel.py" name="klavyekontrol" output="screen"/> 
+
+</launch>
+
+
+
+<!-- _base_frame:=robot/base_link -->
+<!-- /map  /robot/odom -->
+
+ <!-- -->
+
+ <!--  -->
+
+<!--g m ap ppp  
+
+args="scan:=/robot/hokuyo _base_framer="robot/base_link"/>
+    <param name="odom_frame" value="robot/odom"/>
+    <param name="map_frame"  value="map"/>
+</node>  
+-->
+
+<!-- g m ap ppp-->
+<!--
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find rtg_proje)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/dwa_local_planner_params_burger.yaml" command="load" />
+    <remap from="cmd_vel" to="robot/cmd_vel"/>
+    <remap from="odom" to="robot/odom"/>
+  </node>
+
+
+ * <remap from="odom" to="robot/odom"/>   
+ <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find rtg_proje)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/dwa_local_planner_params_burger.yaml" command="load" />
+-->
+ 
+<!--
+<node pkg="tf" type="static_transform_publisher" name="mapa_s" args="0.13 0 0.42 0.0 0.0 0.0 robot/base_link map 6" />
+-->
+<!-- node pkg="tf" type="static_transform_publisher" name="mapa_s" args="0.13 0 0.42 0.0 0.0 0.0 robot/base_link map 6" /-->
+
+
+<!-- node pkg="tf" type="static_transform_publisher" name="mapa_s" args="0.00 0 0.0 0.0 0.0 0.0 robot/base_link map 6" /-->
+<!-- map -> odom / odom->base_footprint-->
+
+
+
+
+<!--node pkg="tf" type="static_transform_publisher" name="odom_to_footprint" args="0.00 0 0.0 0.0 0.0 0.0 odom base_footprint 100" /-->
+<!--node pkg="tf" type="static_transform_publisher" name="map_to_footprint" args="0.00 0 0.0 0.0 0.0 0.0 map base_footprint 100" /-->
+<!--
+  <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+    <remap from="cmd_vel" to="robot/cmd_vel"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find rtg_proje)/param/costmap_common_params_burger.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find rtg_proje)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find rtg_proje)/param/dwa_local_planner_params_burger.yaml" command="load" />
+  </node>
+-->
+<!--  -->
