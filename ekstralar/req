@@ -1,0 +1,19 @@
+
+
+rosrun tf static_transform_publisher 0 0 0 0 0 0 /map  /robot/odom 5
+
+rosrun tf static_transform_publisher 0 0 0 0 0 0 map base_link 5
+
+
+rosrun gmapping slam_gmapping scan:=/robot/hokuyo _base_frame:=robot/base_link
+
+
+sudo apt-get install ros-kinetic-object-recognition-core
+
+
+
+
+
+roslaunch visp_auto_tracker tracklive_firewire.launch 
+
+
